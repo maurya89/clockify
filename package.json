@@ -2,21 +2,43 @@
   "name": "clockify",
   "version": "0.1.0",
   "private": true,
+  "description": "clockify",
+  "author": "Ashish Maurya",
+  "build": {
+    "appId": "com.clockify"
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
   "dependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
+    "@types/react-redux": "^7.1.2",
+    "@types/react-router-dom": "^4.3.5",
+    "antd": "^3.23.3",
+    "concurrently": "^4.1.2",
+    "cross-env": "^5.2.1",
+    "electron-is-dev": "^1.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "typescript": "3.6.3"
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "typescript": "3.6.3",
+    "wait-on": "^3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "release": "npm run react-build && electron-builder --publish=always",
+    "build": "npm run react-build && npm run electron-build",
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,5 +54,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^6.0.9",
+    "electron-builder": "^21.2.0"
   }
 }
